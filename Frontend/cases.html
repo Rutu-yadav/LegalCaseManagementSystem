@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cases - Legal Case Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">LegalCase Pro</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../Dashboard.html">Dashboard</a></li>
+                    <li><a href="cases.html" class="active">Cases</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html" class="btn btn-outline">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="flex-between mb-3">
+                <h1>Case Management</h1>
+                <a href="#" class="btn btn-primary">+ Add New Case</a>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" class="form-control" placeholder="Search cases by ID, client name, or type...">
+                <select class="form-control" style="max-width: 200px;">
+                    <option>All Status</option>
+                    <option>Active</option>
+                    <option>Pending</option>
+                    <option>Closed</option>
+                    <option>In Review</option>
+                </select>
+                <button class="btn btn-primary">Search</button>
+            </div>
+
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Case ID</th>
+                                <th>Client Name</th>
+                                <th>Case Type</th>
+                                <th>Filed Date</th>
+                                <th>Status</th>
+                                <th>Assigned To</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#CASE-001</strong></td>
+                                <td>John Smith</td>
+                                <td>Civil Litigation</td>
+                                <td>2024-11-15</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>Attorney A. Johnson</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">View</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Edit</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#CASE-002</strong></td>
+                                <td>Sarah Johnson</td>
+                                <td>Criminal Defense</td>
+                                <td>2024-11-20</td>
+                                <td><span class="badge badge-warning">Pending</span></td>
+                                <td>Attorney B. Williams</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">View</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Edit</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#CASE-003</strong></td>
+                                <td>Michael Brown</td>
+                                <td>Corporate Law</td>
+                                <td>2024-10-10</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>Attorney C. Davis</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">View</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Edit</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#CASE-004</strong></td>
+                                <td>Emily Davis</td>
+                                <td>Family Law</td>
+                                <td>2024-11-25</td>
+                                <td><span class="badge badge-primary">In Review</span></td>
+                                <td>Attorney A. Johnson</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">View</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Edit</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#CASE-005</strong></td>
+                                <td>Robert Wilson</td>
+                                <td>Real Estate</td>
+                                <td>2024-09-05</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>Attorney B. Williams</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">View</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Edit</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#CASE-006</strong></td>
+                                <td>Lisa Anderson</td>
+                                <td>Employment Law</td>
+                                <td>2024-08-20</td>
+                                <td><span class="badge badge-danger">Closed</span></td>
+                                <td>Attorney C. Davis</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">View</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Edit</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">Case Statistics</div>
+                    <div style="display: flex; justify-content: space-around; text-align: center; padding: 1rem 0;">
+                        <div>
+                            <h3 style="color: var(--accent-color); font-size: 2rem; margin-bottom: 0.5rem;">24</h3>
+                            <p>Total Cases</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--success-color); font-size: 2rem; margin-bottom: 0.5rem;">18</h3>
+                            <p>Active Cases</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--warning-color); font-size: 2rem; margin-bottom: 0.5rem;">4</h3>
+                            <p>Pending Cases</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--danger-color); font-size: 2rem; margin-bottom: 0.5rem;">2</h3>
+                            <p>Closed Cases</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>LegalCase Pro</h3>
+                <p>Comprehensive legal case management solution for modern law firms. Streamline your workflow and manage cases efficiently.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="../index.html">Home</a>
+                <a href="../Dashboard.html">Dashboard</a>
+                <a href="cases.html">Cases</a>
+                <a href="documents.html">Documents</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@legalcasepro.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Legal Street, Law City, LC 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 LegalCase Pro. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

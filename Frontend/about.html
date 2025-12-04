@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - LegalCase Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .about-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .about-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .about-section {
+            padding: 3rem 0;
+        }
+        .about-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .value-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .value-card h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .value-card p {
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .team-section {
+            background: var(--light-bg);
+            padding: 3rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">LegalCase Pro</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../Dashboard.html">Dashboard</a></li>
+                    <li><a href="cases.html">Cases</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="login.html" class="btn btn-outline">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <h1>About LegalCase Pro</h1>
+            <p>Empowering law firms and legal professionals with cutting-edge case management technology designed to streamline operations, enhance productivity, and deliver exceptional client service.</p>
+        </section>
+
+        <div class="container">
+            <section class="about-section">
+                <div class="about-content">
+                    <h2>Our Story</h2>
+                    <p>
+                        LegalCase Pro was founded with a simple yet powerful vision: to revolutionize how legal professionals manage their practice. After years of witnessing law firms struggle with outdated systems, fragmented workflows, and time-consuming administrative tasks, we set out to create a comprehensive solution that addresses these challenges head-on.
+                    </p>
+                    <p>
+                        Our platform combines decades of legal industry expertise with modern technology to deliver a case management system that is both powerful and intuitive. We understand that every minute saved on administrative tasks is a minute that can be dedicated to serving clients and building stronger cases.
+                    </p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="about-content">
+                    <h2>Our Mission</h2>
+                    <p>
+                        To empower legal professionals with innovative technology that simplifies case management, enhances collaboration, and enables them to focus on what matters most – delivering exceptional legal services to their clients.
+                    </p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="about-content">
+                    <h2>Our Vision</h2>
+                    <p>
+                        To become the leading case management platform trusted by law firms worldwide, recognized for our commitment to innovation, security, and customer success. We envision a future where legal professionals can work more efficiently, collaborate seamlessly, and achieve better outcomes for their clients.
+                    </p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="about-content">
+                    <h2>Why Choose LegalCase Pro?</h2>
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <h3>🔒 Security First</h3>
+                            <p>Bank-level encryption and compliance with legal industry standards ensure your sensitive data is always protected.</p>
+                        </div>
+                        <div class="value-card">
+                            <h3>⚡ Efficiency</h3>
+                            <p>Streamline your workflow with automated processes, reducing administrative time by up to 40%.</p>
+                        </div>
+                        <div class="value-card">
+                            <h3>📊 Data-Driven</h3>
+                            <p>Make informed decisions with comprehensive analytics and reporting tools built into the platform.</p>
+                        </div>
+                        <div class="value-card">
+                            <h3>🤝 Collaboration</h3>
+                            <p>Seamless team collaboration features that keep everyone on the same page, no matter where they are.</p>
+                        </div>
+                        <div class="value-card">
+                            <h3>📱 Accessibility</h3>
+                            <p>Access your cases and documents from anywhere, on any device, at any time.</p>
+                        </div>
+                        <div class="value-card">
+                            <h3>💡 Innovation</h3>
+                            <p>Continuously evolving platform with regular updates and new features based on user feedback.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>10,000+</h3>
+                        <p>Active Users</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Law Firms</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1M+</h3>
+                        <p>Cases Managed</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>99.9%</h3>
+                        <p>Uptime</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section team-section">
+                <div class="about-content">
+                    <h2>Our Commitment</h2>
+                    <p>
+                        At LegalCase Pro, we are committed to providing exceptional service and support to our clients. Our dedicated team of legal technology experts, developers, and customer success specialists work tirelessly to ensure your success. We believe in building long-term partnerships with our clients and are always here to help you maximize the value of our platform.
+                    </p>
+                    <p>
+                        Whether you're a solo practitioner or part of a large law firm, LegalCase Pro is designed to scale with your practice. Our flexible pricing plans and customizable features ensure that you only pay for what you need, while having the option to expand as your practice grows.
+                    </p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="about-content text-center">
+                    <h2>Get in Touch</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                        Have questions? We'd love to hear from you. Our team is ready to help you transform your legal practice.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                        <div>
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">📧 Email</h3>
+                            <p>support@legalcasepro.com</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">📞 Phone</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">📍 Address</h3>
+                            <p>123 Legal Street<br>Law City, LC 12345</p>
+                        </div>
+                    </div>
+                    <a href="login.html" class="btn btn-primary mt-4" style="display: inline-block;">Start Your Free Trial</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>LegalCase Pro</h3>
+                <p>Comprehensive legal case management solution for modern law firms. Streamline your workflow and manage cases efficiently.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="../index.html">Home</a>
+                <a href="../Dashboard.html">Dashboard</a>
+                <a href="cases.html">Cases</a>
+                <a href="documents.html">Documents</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@legalcasepro.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Legal Street, Law City, LC 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 LegalCase Pro. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

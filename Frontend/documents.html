@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents - Legal Case Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">LegalCase Pro</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../Dashboard.html">Dashboard</a></li>
+                    <li><a href="cases.html">Cases</a></li>
+                    <li><a href="documents.html" class="active">Documents</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html" class="btn btn-outline">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="flex-between mb-3">
+                <h1>Document Management</h1>
+                <a href="#" class="btn btn-primary">+ Upload Document</a>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" class="form-control" placeholder="Search documents by name, case ID, or type...">
+                <select class="form-control" style="max-width: 200px;">
+                    <option>All Types</option>
+                    <option>Contracts</option>
+                    <option>Evidence</option>
+                    <option>Court Filings</option>
+                    <option>Correspondence</option>
+                    <option>Reports</option>
+                </select>
+                <button class="btn btn-primary">Search</button>
+            </div>
+
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Document Name</th>
+                                <th>Case ID</th>
+                                <th>Type</th>
+                                <th>Upload Date</th>
+                                <th>Size</th>
+                                <th>Uploaded By</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Contract_Agreement_2024.pdf</strong></td>
+                                <td>#CASE-001</td>
+                                <td>Contract</td>
+                                <td>2024-11-15</td>
+                                <td>2.4 MB</td>
+                                <td>Attorney A. Johnson</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">Download</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Evidence_Photo_Set_1.zip</strong></td>
+                                <td>#CASE-002</td>
+                                <td>Evidence</td>
+                                <td>2024-11-20</td>
+                                <td>15.8 MB</td>
+                                <td>Attorney B. Williams</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">Download</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Court_Filing_Motion.pdf</strong></td>
+                                <td>#CASE-001</td>
+                                <td>Court Filing</td>
+                                <td>2024-11-18</td>
+                                <td>1.2 MB</td>
+                                <td>Attorney A. Johnson</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">Download</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Client_Correspondence_Email.pdf</strong></td>
+                                <td>#CASE-003</td>
+                                <td>Correspondence</td>
+                                <td>2024-11-22</td>
+                                <td>0.8 MB</td>
+                                <td>Attorney C. Davis</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">Download</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Case_Report_Summary.docx</strong></td>
+                                <td>#CASE-004</td>
+                                <td>Report</td>
+                                <td>2024-11-25</td>
+                                <td>0.5 MB</td>
+                                <td>Attorney A. Johnson</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">Download</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Witness_Statement_John_Doe.pdf</strong></td>
+                                <td>#CASE-002</td>
+                                <td>Evidence</td>
+                                <td>2024-11-21</td>
+                                <td>0.9 MB</td>
+                                <td>Attorney B. Williams</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; margin-right: 0.5rem;">Download</a>
+                                    <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">Document Statistics</div>
+                    <div style="display: flex; justify-content: space-around; text-align: center; padding: 1rem 0;">
+                        <div>
+                            <h3 style="color: var(--accent-color); font-size: 2rem; margin-bottom: 0.5rem;">156</h3>
+                            <p>Total Documents</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--success-color); font-size: 2rem; margin-bottom: 0.5rem;">45</h3>
+                            <p>Contracts</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--warning-color); font-size: 2rem; margin-bottom: 0.5rem;">62</h3>
+                            <p>Evidence Files</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 0.5rem;">49</h3>
+                            <p>Court Filings</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Storage Usage</div>
+                    <div style="padding: 1rem 0;">
+                        <div style="margin-bottom: 1rem;">
+                            <div class="flex-between mb-1">
+                                <span>Used Storage</span>
+                                <span><strong>2.4 GB / 10 GB</strong></span>
+                            </div>
+                            <div style="background: var(--light-bg); border-radius: 10px; height: 20px; overflow: hidden;">
+                                <div style="background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%); height: 100%; width: 24%; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        <p style="color: var(--light-text); font-size: 0.9rem;">You have 7.6 GB of storage remaining</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>LegalCase Pro</h3>
+                <p>Comprehensive legal case management solution for modern law firms. Streamline your workflow and manage cases efficiently.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="../index.html">Home</a>
+                <a href="../Dashboard.html">Dashboard</a>
+                <a href="cases.html">Cases</a>
+                <a href="documents.html">Documents</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@legalcasepro.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Legal Street, Law City, LC 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 LegalCase Pro. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

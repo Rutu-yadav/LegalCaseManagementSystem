@@ -1,13 +1,121 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
-  <body>
-    <h1 class="text-3xl font-bold underline text-blue-500">
-      Hello world!
-    </h1>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Case Management System - Home</title>
+    <link rel="stylesheet" href="Frontend/styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">LegalCase Pro</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="Dashboard.html">Dashboard</a></li>
+                    <li><a href="Frontend/cases.html">Cases</a></li>
+                    <li><a href="Frontend/documents.html">Documents</a></li>
+                    <li><a href="Frontend/about.html">About</a></li>
+                    <li><a href="Frontend/login.html" class="btn btn-outline">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Legal Case Management System</h1>
+            <p>Streamline your legal practice with our comprehensive case management solution</p>
+            <a href="Frontend/login.html" class="btn btn-primary">Get Started</a>
+        </section>
+
+        <div class="container">
+            <section class="grid">
+                <div class="card">
+                    <div class="card-header">Case Management</div>
+                    <p>Efficiently manage all your legal cases in one centralized system. Track case progress, deadlines, and important dates with ease.</p>
+                    <a href="Frontend/cases.html" class="btn btn-primary mt-2">View Cases</a>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Document Management</div>
+                    <p>Organize and store all case-related documents securely. Easy access to contracts, evidence, and legal documents.</p>
+                    <a href="Frontend/documents.html" class="btn btn-primary mt-2">View Documents</a>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Client Management</div>
+                    <p>Maintain comprehensive client profiles with contact information, case history, and communication logs.</p>
+                    <a href="Dashboard.html" class="btn btn-primary mt-2">View Dashboard</a>
+                </div>
+            </section>
+
+            <section class="mt-4">
+                <h2 class="text-center mb-3">Key Features</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>📅 Calendar & Scheduling</h3>
+                        <p>Never miss a court date or deadline with our integrated calendar system.</p>
+                    </div>
+                    <div class="card">
+                        <h3>📊 Analytics & Reports</h3>
+                        <p>Generate detailed reports and analytics to track your practice's performance.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🔒 Secure & Compliant</h3>
+                        <p>Bank-level security with compliance to legal industry standards.</p>
+                    </div>
+                    <div class="card">
+                        <h3>👥 Team Collaboration</h3>
+                        <p>Work seamlessly with your team members on shared cases and documents.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>LegalCase Pro</h3>
+                <p>Comprehensive legal case management solution for modern law firms. Streamline your workflow and manage cases efficiently.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="Dashboard.html">Dashboard</a>
+                <a href="Frontend/cases.html">Cases</a>
+                <a href="Frontend/documents.html">Documents</a>
+                <a href="Frontend/about.html">About Us</a>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@legalcasepro.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Legal Street, Law City, LC 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 LegalCase Pro. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
 </html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Legal Case Management System</title>
+    <link rel="stylesheet" href="Frontend/styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">LegalCase Pro</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="Frontend/cases.html">Cases</a></li>
+                    <li><a href="Frontend/documents.html">Documents</a></li>
+                    <li><a href="Frontend/about.html">About</a></li>
+                    <li><a href="Frontend/login.html" class="btn btn-outline">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="mb-3">Dashboard</h1>
+            
+            <div class="grid">
+                <div class="stats-card">
+                    <h3>24</h3>
+                    <p>Active Cases</p>
+                </div>
+                <div class="stats-card">
+                    <h3>156</h3>
+                    <p>Total Documents</p>
+                </div>
+                <div class="stats-card">
+                    <h3>8</h3>
+                    <p>Upcoming Hearings</p>
+                </div>
+                <div class="stats-card">
+                    <h3>12</h3>
+                    <p>Pending Tasks</p>
+                </div>
+            </div>
+
+            <div class="grid" style="grid-template-columns: 2fr 1fr;">
+                <div class="card">
+                    <div class="card-header">Recent Cases</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Case ID</th>
+                                    <th>Client Name</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#CASE-001</td>
+                                    <td>John Smith</td>
+                                    <td>Civil</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="Frontend/cases.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#CASE-002</td>
+                                    <td>Sarah Johnson</td>
+                                    <td>Criminal</td>
+                                    <td><span class="badge badge-warning">Pending</span></td>
+                                    <td><a href="Frontend/cases.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#CASE-003</td>
+                                    <td>Michael Brown</td>
+                                    <td>Corporate</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="Frontend/cases.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#CASE-004</td>
+                                    <td>Emily Davis</td>
+                                    <td>Family</td>
+                                    <td><span class="badge badge-primary">In Review</span></td>
+                                    <td><a href="Frontend/cases.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="Frontend/cases.html" class="btn btn-secondary mt-2">View All Cases</a>
+                </div>
+
+                <div>
+                    <div class="card">
+                        <div class="card-header">Upcoming Events</div>
+                        <div style="margin-bottom: 1rem;">
+                            <div style="padding: 1rem; background: var(--light-bg); border-radius: 5px; margin-bottom: 0.5rem;">
+                                <strong>Court Hearing</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--light-text); font-size: 0.9rem;">Case #CASE-001</p>
+                                <p style="margin: 0.25rem 0 0 0; color: var(--light-text); font-size: 0.9rem;">📅 Dec 15, 2024 - 10:00 AM</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--light-bg); border-radius: 5px; margin-bottom: 0.5rem;">
+                                <strong>Client Meeting</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--light-text); font-size: 0.9rem;">Sarah Johnson</p>
+                                <p style="margin: 0.25rem 0 0 0; color: var(--light-text); font-size: 0.9rem;">📅 Dec 16, 2024 - 2:00 PM</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--light-bg); border-radius: 5px;">
+                                <strong>Document Deadline</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--light-text); font-size: 0.9rem;">Filing Submission</p>
+                                <p style="margin: 0.25rem 0 0 0; color: var(--light-text); font-size: 0.9rem;">📅 Dec 18, 2024 - 5:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">Quick Actions</div>
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <a href="Frontend/cases.html" class="btn btn-primary">Add New Case</a>
+                            <a href="Frontend/documents.html" class="btn btn-secondary">Upload Document</a>
+                            <a href="Frontend/cases.html" class="btn btn-outline">Generate Report</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>LegalCase Pro</h3>
+                <p>Comprehensive legal case management solution for modern law firms. Streamline your workflow and manage cases efficiently.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="Dashboard.html">Dashboard</a>
+                <a href="Frontend/cases.html">Cases</a>
+                <a href="Frontend/documents.html">Documents</a>
+                <a href="Frontend/about.html">About Us</a>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@legalcasepro.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Legal Street, Law City, LC 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 LegalCase Pro. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
