@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reports - Legal Case Management System</title>
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#6b7a8a;
+      --primary-600: #667eea;
+      --primary-700: #5a67d8;
+      --accent:#764ba2;
+      --success:#27ae60;
+      --shadow: 0 10px 30px rgba(24,39,75,0.06);
+      --radius:12px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg) 0%, #e9eef9 100%);
+      color:#223046;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    /* Header */
+    .page-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      margin-bottom:22px;
+      flex-wrap:wrap;
+    }
+    .page-title h1{font-size:22px;margin:0;color:var(--primary-700)}
+    .page-title p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    .header-actions{display:flex;gap:10px;align-items:center}
+    .search{
+      position:relative;
+      width:260px;
+      max-width:100%;
+    }
+    .search input{
+      width:100%;padding:10px 12px 10px 36px;border-radius:10px;border:1px solid #e6eef8;background:white;color:#334155;font-size:14px;
+      box-shadow:none;transition:box-shadow .18s, border-color .18s;
+    }
+    .search input:focus{outline:none;border-color:var(--primary-600);box-shadow:0 6px 18px rgba(102,126,234,0.12)}
+    .search::before{content:'🔍';position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none}
+
+    .btn-primary{
+      background:linear-gradient(90deg,var(--primary-600),var(--accent));
+      color:white;padding:10px 14px;border-radius:10px;border:none;font-weight:600;cursor:pointer;box-shadow:var(--shadow);
+    }
+
+    /* Summary cards */
+    .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+    .summary-card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);display:flex;align-items:center;gap:12px}
+    .stat-icon{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--primary-600),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-size:20px}
+    .stat-body{flex:1}
+    .stat-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px}
+    .stat-value{font-size:20px;font-weight:700;color:#17233a;margin-top:6px}
+
+    /* Category cards */
+    .categories{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+    .cat-card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);transition:transform .18s, box-shadow .18s;display:flex;flex-direction:column;gap:12px}
+    .cat-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(24,39,75,0.09)}
+    .cat-head{display:flex;align-items:center;gap:12px}
+    .cat-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg, #9fb4ff, #b69be8);display:flex;align-items:center;justify-content:center;color:#fff}
+    .cat-title{font-weight:700;color:#23304a}
+    .cat-desc{color:var(--muted);font-size:13px}
+    .cat-actions{margin-top:auto;display:flex;gap:8px}
+    .cat-actions a{font-size:13px;color:var(--primary-700);text-decoration:none;padding:8px 10px;border-radius:8px;border:1px solid #eef3ff}
+    .cat-actions a:hover{background:linear-gradient(90deg,var(--primary-600),var(--accent));color:#fff;border-color:transparent}
+
+    /* Reports table */
+    .reports-card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .reports-card h2{margin:0 0 12px;font-size:16px;color:var(--primary-700)}
+    .table-wrap{overflow:auto;border-radius:10px}
+    table{width:100%;border-collapse:collapse;min-width:720px}
+    thead th{background:linear-gradient(90deg,var(--primary-600),var(--accent));color:#fff;padding:12px 14px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase}
+    tbody tr{background:transparent;transition:background .12s}
+    tbody tr:hover{background:#fbfdff}
+    td{padding:12px 14px;border-bottom:1px solid #eef3fb;color:#2b3a4a;font-size:14px;vertical-align:middle}
+    .rep-name{font-weight:700;color:#17233a}
+    .rep-meta{color:var(--muted);font-size:13px}
+    .rep-actions{display:flex;gap:8px}
+    .action-link{padding:8px 10px;border-radius:8px;border:1px solid #e6eef8;background:white;color:var(--primary-700);text-decoration:none;font-weight:600}
+    .action-link:hover{background:var(--primary-600);color:white;border-color:transparent}
+
+    /* Download badge */
+    .download-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;background:#f4f7ff;border-radius:999px;color:var(--primary-700);font-weight:700}
+
+    /* Responsive */
+    @media (max-width:1100px){
+      .summary-grid{grid-template-columns:repeat(2,1fr)}
+      .categories{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:720px){
+      .page-header{align-items:flex-start}
+      .summary-grid{grid-template-columns:1fr}
+      .categories{grid-template-columns:1fr}
+      table{min-width:600px}
+    }
+    @media (max-width:520px){
+      .search{width:100%}
+      .page-header{flex-direction:column;gap:12px}
+      .header-actions{width:100%;display:flex;flex-direction:column}
+      .header-actions .btn-primary{width:100%}
+      .table-wrap{overflow:auto}
+      table{min-width:520px}
+    }
+
+    /* Small touches */
+    a{color:inherit}
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <div class="page-title">
+        <h1>Reports</h1>
+        <p>Overview of generated reports and quick access to downloads.</p>
+      </div>
+      <div class="header-actions">
+        <div class="search" role="search">
+          <input type="search" placeholder="Search reports by name, case, client..." aria-label="Search reports">
+        </div>
+        <button class="btn-primary">Generate Report</button>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="summary-grid" aria-label="Report summaries">
+      <div class="summary-card">
+        <div class="stat-icon">📁</div>
+        <div class="stat-body">
+          <div class="stat-title">Total Reports</div>
+          <div class="stat-value">128</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="stat-icon">📄</div>
+        <div class="stat-body">
+          <div class="stat-title">Case Reports</div>
+          <div class="stat-value">62</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-body">
+          <div class="stat-title">Client Reports</div>
+          <div class="stat-value">28</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="stat-icon">⚖️</div>
+        <div class="stat-body">
+          <div class="stat-title">Hearing Reports</div>
+          <div class="stat-value">38</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" aria-label="Report categories">
+      <article class="cat-card">
+        <div class="cat-head">
+          <div class="cat-icon">🗂️</div>
+          <div>
+            <div class="cat-title">Case Reports</div>
+            <div class="cat-desc">Detailed case-level analytics and summaries.</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <a href="#">View</a>
+          <a href="#">Download</a>
+        </div>
+      </article>
+
+      <article class="cat-card">
+        <div class="cat-head">
+          <div class="cat-icon">👥</div>
+          <div>
+            <div class="cat-title">Client Reports</div>
+            <div class="cat-desc">Reports grouped by client: cases, payments, contact history.</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <a href="#">View</a>
+          <a href="#">Download</a>
+        </div>
+      </article>
+
+      <article class="cat-card">
+        <div class="cat-head">
+          <div class="cat-icon">🧑‍⚖️</div>
+          <div>
+            <div class="cat-title">Advocate Reports</div>
+            <div class="cat-desc">Performance and hearing logs for advocates.</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <a href="#">View</a>
+          <a href="#">Download</a>
+        </div>
+      </article>
+
+      <article class="cat-card">
+        <div class="cat-head">
+          <div class="cat-icon">🏛️</div>
+          <div>
+            <div class="cat-title">Hearing Reports</div>
+            <div class="cat-desc">Schedules, outcomes, and hearing durations.</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <a href="#">View</a>
+          <a href="#">Download</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- Reports table -->
+    <section class="reports-card" aria-label="Detailed reports">
+      <h2>Available Reports</h2>
+      <div class="table-wrap">
+        <table aria-describedby="Available reports list">
+          <thead>
+            <tr>
+              <th>Report</th>
+              <th>Category</th>
+              <th>Generated</th>
+              <th>Size</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="rep-name">Monthly Case Summary - Nov 2025</div>
+                <div class="rep-meta">Includes case counts, statuses and timelines</div>
+              </td>
+              <td>Case Reports</td>
+              <td>Nov 30, 2025</td>
+              <td>1.2 MB</td>
+              <td class="rep-actions">
+                <a class="action-link" href="#" title="View report">View</a>
+                <a class="action-link" href="#" title="Download report" download>Download</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="rep-name">Client Activity - John Smith</div>
+                <div class="rep-meta">Activity log, case status and documents</div>
+              </td>
+              <td>Client Reports</td>
+              <td>Dec 01, 2025</td>
+              <td>320 KB</td>
+              <td class="rep-actions">
+                <a class="action-link" href="#">View</a>
+                <a class="action-link" href="#" download>Download</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="rep-name">Advocate Performance Q3</div>
+                <div class="rep-meta">Hearings won, average duration, case load</div>
+              </td>
+              <td>Advocate Reports</td>
+              <td>Oct 15, 2025</td>
+              <td>860 KB</td>
+              <td class="rep-actions">
+                <a class="action-link" href="#">View</a>
+                <a class="action-link" href="#" download>Download</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="rep-name">Hearing Outcomes - Last 90 Days</div>
+                <div class="rep-meta">Summary of hearing results and delays</div>
+              </td>
+              <td>Hearing Reports</td>
+              <td>Nov 20, 2025</td>
+              <td>2.1 MB</td>
+              <td class="rep-actions">
+                <a class="action-link" href="#">View</a>
+                <a class="action-link" href="#" download>Download</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
