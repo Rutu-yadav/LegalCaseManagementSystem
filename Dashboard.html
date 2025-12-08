@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard - Legal Case Management System</title>
+  <style>
+    :root{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --muted: #6b7a8a;
+      --primary: #667eea;
+      --accent: #764ba2;
+      --success: #27ae60;
+      --shadow: 0 14px 40px rgba(22,34,74,0.06);
+      --radius: 12px;
+      --gap: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(180deg,var(--bg) 0%, #e9eef9 100%);
+      color:#17233a;
+      -webkit-font-smoothing:antialiased;
+      padding:26px;
+    }
+
+    .container{max-width:1200px;margin:0 auto}
+
+    /* Header */
+    header.dashboard-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+    .brand{display:flex;flex-direction:column}
+    .brand h1{font-size:20px;margin:0;color:var(--primary)}
+    .brand p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    .header-actions{display:flex;gap:10px;align-items:center}
+    .btn{background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
+    .quick-link{background:var(--card);padding:8px 12px;border-radius:10px;border:1px solid #eef3ff;color:var(--primary);font-weight:700}
+
+    /* Grid layout */
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:var(--gap);align-items:start}
+
+    /* Summary cards */
+    .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);margin-bottom:var(--gap)}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;transition:transform .14s, box-shadow .14s}
+    .card:hover{transform:translateY(-6px)}
+    .card .icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px}
+    .card .body{flex:1}
+    .card .title{font-size:12px;color:var(--muted);text-transform:uppercase;font-weight:700;letter-spacing:.6px}
+    .card .value{font-size:20px;font-weight:800;margin-top:6px}
+
+    .icon.clients{background:linear-gradient(135deg,#7bd389,#2dbd85)}
+    .icon.cases{background:linear-gradient(135deg,#8fb4ff,#667eea)}
+    .icon.hearings{background:linear-gradient(135deg,#ffd88f,#f39c12)}
+    .icon.docs{background:linear-gradient(135deg,#f6a6ff,#764ba2)}
+
+    /* Main left column */
+    .left{display:flex;flex-direction:column;gap:var(--gap)}
+    .analytics{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+    .panel{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .panel h3{margin:0 0 12px;font-size:15px;color:var(--primary)}
+
+    /* Placeholder chart boxes */
+    .chart-placeholder{height:180px;border-radius:10px;background:linear-gradient(180deg,#fbfdff,#f2f7ff);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+    .mini-stats{display:flex;gap:12px;margin-top:12px}
+    .mini{flex:1;background:#fff;padding:10px;border-radius:8px;text-align:center;border:1px solid #f0f4ff}
+    .mini .label{font-size:12px;color:var(--muted);font-weight:700}
+    .mini .num{font-size:18px;font-weight:800;margin-top:6px}
+
+    /* Recent activity */
+    .recent{display:flex;flex-direction:column;gap:12px}
+    .activity-list{background:var(--card);padding:12px;border-radius:var(--radius);box-shadow:var(--shadow);max-height:520px;overflow:auto}
+    .activity-item{display:flex;gap:12px;padding:10px;border-radius:8px;align-items:flex-start}
+    .activity-item:hover{background:#fbfdff}
+    .act-icon{width:44px;height:44;border-radius:10px;background:#eef6ff;display:flex;align-items:center;justify-content:center;color:var(--primary);font-weight:800}
+    .act-body{flex:1}
+    .act-title{font-weight:700;color:#17233a}
+    .act-meta{font-size:13px;color:var(--muted);margin-top:6px}
+
+    /* Right column */
+    .right{display:flex;flex-direction:column;gap:var(--gap)}
+    .small-panel{background:var(--card);padding:14px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .small-panel h4{margin:0 0 10px;font-size:14px;color:var(--primary)}
+    .kpi{display:flex;flex-direction:column;gap:8px}
+    .kpi-item{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;background:#fbfdff}
+    .kpi-item .label{color:var(--muted);font-weight:700}
+    .kpi-item .num{font-weight:800;color:#17233a}
+
+    /* footer widgets */
+    .footer-widgets{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap);margin-top:var(--gap)}
+    .activity-tiny{background:var(--card);padding:12px;border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr 320px}
+      .summary{grid-template-columns:repeat(2,1fr)}
+      .analytics{grid-template-columns:1fr}
+      .footer-widgets{grid-template-columns:1fr}
+    }
+    @media (max-width:720px){
+      .grid{grid-template-columns:1fr}
+      .summary{grid-template-columns:1fr}
+      header.dashboard-header{align-items:flex-start}
+      .header-actions{width:100%;display:flex;gap:10px}
+      .brand h1{font-size:18px}
+    }
+
+    /* small touches */
+    .muted{color:var(--muted)}
+    a{color:inherit}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="dashboard-header">
+      <div class="brand">
+        <h1>Admin Dashboard</h1>
+        <p class="muted">Overview of system metrics and recent activity</p>
+      </div>
+      <div class="header-actions">
+        <button class="quick-link">Settings</button>
+        <button class="btn">Generate Report</button>
+      </div>
+    </header>
+
+    <section class="summary">
+      <div class="card">
+        <div class="icon clients">👥</div>
+        <div class="body">
+          <div class="title">Total Clients</div>
+          <div class="value">1,248</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon cases">📁</div>
+        <div class="body">
+          <div class="title">Total Cases</div>
+          <div class="value">3,412</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon hearings">📆</div>
+        <div class="body">
+          <div class="title">Upcoming Hearings</div>
+          <div class="value">24</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon docs">📄</div>
+        <div class="body">
+          <div class="title">Uploaded Documents</div>
+          <div class="value">5,812</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <div class="left">
+        <div class="analytics">
+          <div class="panel">
+            <h3>Case Trends</h3>
+            <div class="chart-placeholder">[ Line chart placeholder ]</div>
+            <div class="mini-stats">
+              <div class="mini"><div class="label">New Cases (30d)</div><div class="num">128</div></div>
+              <div class="mini"><div class="label">Closed (30d)</div><div class="num">94</div></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Documents & Uploads</h3>
+            <div class="chart-placeholder">[ Bar chart placeholder ]</div>
+            <div class="mini-stats">
+              <div class="mini"><div class="label">PDFs</div><div class="num">3,102</div></div>
+              <div class="mini"><div class="label">Images</div><div class="num">1,210</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Quick Analytics</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+            <div style="flex:1;min-width:180px;background:#fff;padding:12px;border-radius:10px;border:1px solid #f0f4ff"> 
+              <div class="muted">Avg. Case Duration</div>
+              <div style="font-weight:800;font-size:18px;margin-top:6px">14 months</div>
+            </div>
+            <div style="flex:1;min-width:180px;background:#fff;padding:12px;border-radius:10px;border:1px solid #f0f4ff"> 
+              <div class="muted">Avg. Hearing Delay</div>
+              <div style="font-weight:800;font-size:18px;margin-top:6px">6 days</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-list">
+          <h3 style="margin:0 0 12px;color:var(--primary)">Recent Activity</h3>
+          <div class="activity-item">
+            <div class="act-icon">🗂️</div>
+            <div class="act-body">
+              <div class="act-title">Document uploaded: "Property Deed - Smith.pdf"</div>
+              <div class="act-meta">Uploaded by John Smith • 2 hours ago</div>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="act-icon">⚖️</div>
+            <div class="act-body">
+              <div class="act-title">Hearing scheduled: CASE-2024-005</div>
+              <div class="act-meta">Assigned to Advocate: Michael Johnson • Yesterday</div>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="act-icon">👥</div>
+            <div class="act-body">
+              <div class="act-title">New client added: Lisa Anderson</div>
+              <div class="act-meta">Added by Admin • 2 days ago</div>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="act-icon">📝</div>
+            <div class="act-body">
+              <div class="act-title">Case updated: Brown Family - Inheritance</div>
+              <div class="act-meta">Status changed to Closed • 3 days ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="right">
+        <div class="small-panel">
+          <h4>Key KPIs</h4>
+          <div class="kpi">
+            <div class="kpi-item"><div class="label">Avg. Response Time</div><div class="num">2.3 hrs</div></div>
+            <div class="kpi-item"><div class="label">Open Cases</div><div class="num">1,120</div></div>
+            <div class="kpi-item"><div class="label">Pending Hearings</div><div class="num">48</div></div>
+            <div class="kpi-item"><div class="label">Overdue Tasks</div><div class="num">7</div></div>
+          </div>
+        </div>
+
+        <div class="small-panel">
+          <h4>Upcoming Hearings</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;background:#fbfdff"> 
+              <div style="font-weight:700">Dec 15</div>
+              <div class="muted">CASE-2024-001 • 10:30 AM</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;background:#fbfdff"> 
+              <div style="font-weight:700">Dec 18</div>
+              <div class="muted">CASE-2024-005 • 01:15 PM</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;background:#fbfdff"> 
+              <div style="font-weight:700">Dec 20</div>
+              <div class="muted">CASE-2024-008 • 11:30 AM</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="small-panel">
+          <h4>Shortcuts</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <a class="quick-link" href="#">New Case</a>
+            <a class="quick-link" href="#">Upload Document</a>
+            <a class="quick-link" href="#">Add Client</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer-widgets">
+      <div class="activity-tiny">
+        <h4 style="margin:0 0 8px;color:var(--primary)">System Notes</h4>
+        <p class="muted" style="font-size:13px">No critical alerts. Backups completed today at 02:00 AM.</p>
+      </div>
+      <div class="activity-tiny">
+        <h4 style="margin:0 0 8px;color:var(--primary)">Recent Logins</h4>
+        <p class="muted" style="font-size:13px">Admin, Robert; Lisa A.; Michael J.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
