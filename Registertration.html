@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Legal Case Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .register-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .register-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 500px;
+        }
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .register-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .register-header p {
+            color: var(--light-text);
+        }
+        .error-msg {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        #strengthText {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">LegalCase Pro</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../Dashboard.html">Dashboard</a></li>
+                    <li><a href="cases.html">Cases</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html" class="btn btn-outline">Login</a></li>
+                    <li><a href="../Hearing.html">Hearings</a></li>
+                    <li><a href="../Clients.html">Clients</a></li>
+                    <li><a href="../Contact.html">Contact</a></li>
+                    <li><a href="../Report.html">Reports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="register-container">
+        <div class="register-card">
+            <div class="register-header">
+                <h1>Create Account</h1>
+                <p>Join LegalCase Pro today</p>
+            </div>
+            
+            <form id="registerForm" action="../Dashboard.html" method="get">
+
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="firm">Law Firm Name (Optional)</label>
+                    <input type="text" id="firm" class="form-control" placeholder="Enter your law firm name">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Create a password">
+                    <p id="strengthText"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="form-control" placeholder="Confirm your password">
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" id="terms">
+                        <span>I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+
+                <div class="text-center mt-3">
+                    <p>Already have an account? <a href="login.html" style="color: var(--accent-color); text-decoration: none; font-weight: 500;">Sign In</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer></footer>
+
+    <!-- ==================== ADVANCED JS LOGIC ==================== -->
+    <script>
+
+        const form = document.getElementById("registerForm");
+
+        form.addEventListener("submit", function(event) {
+            // Remove old errors
+            document.querySelectorAll(".error-msg").forEach(e => e.remove());
+
+            let valid = true;
+
+            const fullname = document.getElementById("fullname");
+            const email = document.getElementById("email");
+            const phone = document.getElementById("phone");
+            const password = document.getElementById("password");
+            const confirmPass = document.getElementById("confirm-password");
+            const terms = document.getElementById("terms");
+
+            // Full name
+            if (fullname.value.trim() === "") {
+                showError(fullname, "Full name is required");
+                valid = false;
+            }
+
+            // Email validation
+            if (email.value.trim() === "") {
+                showError(email, "Email is required");
+                valid = false;
+            } 
+            else if (!/\S+@\S+\.\S+/.test(email.value)) {
+                showError(email, "Enter a valid email address");
+                valid = false;
+            }
+
+            // Phone validation (10 digits)
+            if (!/^[0-9]{10}$/.test(phone.value)) {
+                showError(phone, "Enter a valid 10-digit phone number");
+                valid = false;
+            }
+
+            // Password validation
+            if (password.value.length < 6) {
+                showError(password, "Password must be at least 6 characters");
+                valid = false;
+            }
+
+            // Confirm password validation
+            if (password.value !== confirmPass.value) {
+                showError(confirmPass, "Passwords do not match");
+                valid = false;
+            }
+
+            // Terms
+            if (!terms.checked) {
+                alert("You must agree to the terms & conditions");
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+
+        // Function to show error message
+        function showError(input, message) {
+            const err = document.createElement("p");
+            err.className = "error-msg";
+            err.textContent = message;
+            input.parentElement.appendChild(err);
+        }
+
+        // Password strength checker
+        document.getElementById("password").addEventListener("input", function() {
+            const pass = this.value;
+            const strengthText = document.getElementById("strengthText");
+
+            if (pass.length < 4) {
+                strengthText.textContent = "Weak Password";
+                strengthText.style.color = "red";
+            } 
+            else if (pass.length < 8) {
+                strengthText.textContent = "Medium Strength";
+                strengthText.style.color = "orange";
+            } 
+            else {
+                strengthText.textContent = "Strong Password";
+                strengthText.style.color = "green";
+            }
+        });
+    </script>
+
+</body>
+</html>

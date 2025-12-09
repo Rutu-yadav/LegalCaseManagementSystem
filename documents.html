@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents - Legal Case Management System</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+
+        /* Modal */
+        #uploadModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-box {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 400px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .modal-box input,
+        .modal-box select {
+            width: 100%;
+            padding: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-msg {
+            color: red;
+            font-size: 0.85rem;
+            margin-top: -8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">LegalCase Pro</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../Dashboard.html">Dashboard</a></li>
+                    <li><a href="cases.html">Cases</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html" class="btn btn-outline">Login</a></li>
+                    <li><a href="../Hearing.html">Hearings</a></li>
+                    <li><a href="../Clients.html">Clients</a></li>
+                    <li><a href="../Contact.html">Contact</a></li>
+                    <li><a href="../Report.html">Reports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <!-- PAGE HEADER -->
+            <div class="flex-between mb-3">
+                <h1>Document Management</h1>
+                <button id="openUploadModal" class="btn btn-primary">+ Upload Document</button>
+            </div>
+
+            <!-- SEARCH AREA -->
+            <div class="search-bar">
+                <input id="searchDoc" type="text" class="form-control"
+                    placeholder="Search documents by name, case ID, or type...">
+
+                <select id="typeFilter" class="form-control" style="max-width:200px;">
+                    <option value="All">All Types</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Evidence">Evidence</option>
+                    <option value="Court Filing">Court Filing</option>
+                    <option value="Correspondence">Correspondence</option>
+                    <option value="Report">Report</option>
+                </select>
+
+                <button id="searchBtn" class="btn btn-primary">Search</button>
+            </div>
+
+            <!-- TABLE -->
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Document Name</th>
+                                <th>Case ID</th>
+                                <th>Type</th>
+                                <th>Upload Date</th>
+                                <th>Size</th>
+                                <th>Uploaded By</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="docTableBody">
+                            <!-- JS Inserts Content -->
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+            <!-- STATS -->
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">Document Statistics</div>
+                    <div id="docStats"
+                         style="display:flex; justify-content:space-around; text-align:center; padding:1rem 0;">
+                        <!-- Stats updated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- UPLOAD MODAL -->
+    <div id="uploadModal">
+        <div class="modal-box">
+            <h2>Upload Document</h2>
+
+            <input type="file" id="docFile">
+            <input type="text" id="caseId" placeholder="Enter Case ID (e.g., CASE-001)">
+            <select id="docType">
+                <option value="Contract">Contract</option>
+                <option value="Evidence">Evidence</option>
+                <option value="Court Filing">Court Filing</option>
+                <option value="Correspondence">Correspondence</option>
+                <option value="Report">Report</option>
+            </select>
+
+            <input type="text" id="uploadedBy" placeholder="Uploaded By (Attorney Name)">
+
+            <button id="saveDoc" class="btn btn-primary" style="width:100%;">Upload</button>
+            <button id="closeUploadModal" class="btn btn-secondary" style="width:100%; margin-top:8px;">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <!-- ===================== JAVASCRIPT ===================== -->
+    <script>
+
+        let documents = [
+            { name:"Contract_Agreement_2024.pdf", case:"#CASE-001", type:"Contract", date:"2024-11-15", size:"2.4 MB", by:"Attorney A. Johnson" },
+            { name:"Evidence_Photo_Set_1.zip", case:"#CASE-002", type:"Evidence", date:"2024-11-20", size:"15.8 MB", by:"Attorney B. Williams" },
+            { name:"Court_Filing_Motion.pdf", case:"#CASE-001", type:"Court Filing", date:"2024-11-18", size:"1.2 MB", by:"Attorney A. Johnson" },
+            { name:"Client_Correspondence_Email.pdf", case:"#CASE-003", type:"Correspondence", date:"2024-11-22", size:"0.8 MB", by:"Attorney C. Davis" },
+            { name:"Case_Report_Summary.docx", case:"#CASE-004", type:"Report", date:"2024-11-25", size:"0.5 MB", by:"Attorney A. Johnson" },
+            { name:"Witness_Statement_John_Doe.pdf", case:"#CASE-002", type:"Evidence", date:"2024-11-21", size:"0.9 MB", by:"Attorney B. Williams" }
+        ];
+
+        // RENDER TABLE
+        function renderDocs(data = documents) {
+            const tbody = document.getElementById("docTableBody");
+            tbody.innerHTML = "";
+
+            data.forEach(doc => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${doc.name}</strong></td>
+                        <td>${doc.case}</td>
+                        <td>${doc.type}</td>
+                        <td>${doc.date}</td>
+                        <td>${doc.size}</td>
+                        <td>${doc.by}</td>
+                        <td>
+                            <button onclick="downloadDoc('${doc.name}')" class="btn btn-primary">Download</button>
+                            <button class="btn btn-secondary">View</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            updateStats();
+        }
+
+        renderDocs();
+
+
+        // SEARCH DOCUMENTS
+        document.getElementById("searchBtn").onclick = () => {
+            let text = document.getElementById("searchDoc").value.toLowerCase();
+            let filter = document.getElementById("typeFilter").value;
+
+            let filtered = documents.filter(doc =>
+                (doc.name.toLowerCase().includes(text) ||
+                 doc.case.toLowerCase().includes(text) ||
+                 doc.type.toLowerCase().includes(text)) &&
+                (filter === "All" || doc.type === filter)
+            );
+
+            renderDocs(filtered);
+        };
+
+
+        // DOWNLOAD SIMULATION
+        function downloadDoc(name) {
+            alert("Downloading: " + name);
+        }
+
+
+        // UPDATE STATISTICS
+        function updateStats() {
+            let total = documents.length;
+            let contract = documents.filter(d => d.type === "Contract").length;
+            let evidence = documents.filter(d => d.type === "Evidence").length;
+            let filings = documents.filter(d => d.type === "Court Filing").length;
+
+            document.getElementById("docStats").innerHTML = `
+                <div><h3>${total}</h3><p>Total</p></div>
+                <div><h3>${contract}</h3><p>Contracts</p></div>
+                <div><h3>${evidence}</h3><p>Evidence</p></div>
+                <div><h3>${filings}</h3><p>Court Filings</p></div>
+            `;
+        }
+
+
+        // MODAL LOGIC
+        const uploadModal = document.getElementById("uploadModal");
+        document.getElementById("openUploadModal").onclick = () => uploadModal.style.display = "flex";
+        document.getElementById("closeUploadModal").onclick = () => uploadModal.style.display = "none";
+
+
+        // SAVE DOCUMENT
+        document.getElementById("saveDoc").onclick = () => {
+
+            const file = document.getElementById("docFile").files[0];
+            const caseId = document.getElementById("caseId").value;
+            const type = document.getElementById("docType").value;
+            const uploadedBy = document.getElementById("uploadedBy").value;
+
+            // VALIDATION
+            if (!file) return alert("Select a document file!");
+            if (!caseId.trim()) return alert("Enter a valid Case ID");
+            if (!uploadedBy.trim()) return alert("Uploader name required");
+
+            let today = new Date().toISOString().split("T")[0];
+            let fileSize = (file.size / (1024 * 1024)).toFixed(2) + " MB";
+
+            documents.push({
+                name: file.name,
+                case: "#" + caseId.toUpperCase(),
+                type: type,
+                date: today,
+                size: fileSize,
+                by: uploadedBy
+            });
+
+            uploadModal.style.display = "none";
+            renderDocs();
+        };
+
+    </script>
+</body>
+</html>

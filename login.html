@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Legal Case Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .login-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .login-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 450px;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .login-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .login-header p {
+            color: var(--light-text);
+        }
+        .error-msg {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">LegalCase Pro</div>
+            <nav>
+                <ul>
+                   <li><a href="../index.html">Home</a></li>
+                    <li><a href="../Dashboard.html">Dashboard</a></li>
+                    <li><a href="cases.html">Cases</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html" class="btn btn-outline">Login</a></li>
+                    <li><a href="../Hearing.html">Hearings</a></li>
+                    <li><a href="../Clients.html">Clients</a></li>
+                    <li><a href="../Contact.html">Contact</a></li>
+                    <li><a href="../Report.html">Reports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to your account</p>
+            </div>
+            
+            <form id="loginForm" action="../Dashboard.html" method="get">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
+                </div>
+
+                <div class="flex-between mb-2">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" style="color: var(--accent-color); text-decoration: none;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+
+                <div class="text-center mt-3">
+                    <p>Don't have an account? <a href="Registertration.html" style="color: var(--accent-color); text-decoration: none; font-weight: 500;">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>LegalCase Pro</h3>
+                <p>Comprehensive legal case management solution for modern law firms. Streamline your workflow and manage cases efficiently.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="../index.html">Home</a>
+                <a href="../Dashboard.html">Dashboard</a>
+                <a href="cases.html">Cases</a>
+                <a href="documents.html">Documents</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@legalcasepro.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Legal Street, Law City, LC 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 LegalCase Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===================== JS VALIDATION ===================== -->
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+
+            // Remove old errors
+            document.querySelectorAll(".error-msg").forEach(e => e.remove());
+
+            let valid = true;
+
+            // Email validation
+            if (email.value.trim() === "") {
+                showError(email, "Email is required");
+                valid = false;
+            } else if (!/\S+@\S+\.\S+/.test(email.value)) {
+                showError(email, "Enter a valid email address");
+                valid = false;
+            }
+
+            // Password validation
+            if (password.value.trim() === "") {
+                showError(password, "Password is required");
+                valid = false;
+            } else if (password.value.length < 6) {
+                showError(password, "Password must be at least 6 characters");
+                valid = false;
+            }
+
+            // Stop submit if errors
+            if (!valid) event.preventDefault();
+        });
+
+        function showError(inputField, message) {
+            const error = document.createElement("p");
+            error.className = "error-msg";
+            error.textContent = message;
+            inputField.parentElement.appendChild(error);
+        }
+    </script>
+
+</body>
+</html>

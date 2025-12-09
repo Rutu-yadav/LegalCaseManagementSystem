@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cases - Legal Case Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+
+        /* Modal Styles */
+        #addCaseModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .modal-content input, .modal-content select {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: .5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">LegalCase Pro</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../Dashboard.html">Dashboard</a></li>
+                    <li><a href="cases.html">Cases</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="login.html" class="btn btn-outline">Login</a></li>
+                    <li><a href="../Hearing.html">Hearings</a></li>
+                    <li><a href="../Clients.html">Clients</a></li>
+                    <li><a href="../Contact.html">Contact</a></li>
+                    <li><a href="../Report.html">Reports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <!-- HEADER + ADD BUTTON -->
+            <div class="flex-between mb-3">
+                <h1>Case Management</h1>
+                <button id="openAddModal" class="btn btn-primary">+ Add New Case</button>
+            </div>
+
+            <!-- SEARCH AREA -->
+            <div class="search-bar">
+                <input id="searchInput" type="text" class="form-control" placeholder="Search case by ID, client name, or type...">
+
+                <select id="statusFilter" class="form-control" style="max-width: 200px;">
+                    <option value="All">All Status</option>
+                    <option value="Active">Active</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Closed">Closed</option>
+                    <option value="In Review">In Review</option>
+                </select>
+
+                <button id="searchBtn" class="btn btn-primary">Search</button>
+            </div>
+
+            <!-- TABLE -->
+            <div class="card">
+                <div class="table-container">
+                    <table id="caseTable">
+                        <thead>
+                            <tr>
+                                <th>Case ID</th>
+                                <th>Client Name</th>
+                                <th>Case Type</th>
+                                <th>Filed Date</th>
+                                <th>Status</th>
+                                <th>Assigned To</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- JS Will Insert Rows Here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <br>
+
+            <!-- CASE STATISTICS -->
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">Case Statistics</div>
+                    <div id="statsContainer" style="display: flex; justify-content: space-around; text-align: center; padding: 1rem 0;">
+                        <!-- JS WILL UPDATE STATS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ADD CASE MODAL -->
+    <div id="addCaseModal">
+        <div class="modal-content">
+            <h2>Add New Case</h2>
+
+            <input id="newClient" type="text" placeholder="Client Name">
+            <input id="newType" type="text" placeholder="Case Type">
+            
+            <select id="newStatus">
+                <option value="Active">Active</option>
+                <option value="Pending">Pending</option>
+                <option value="Closed">Closed</option>
+                <option value="In Review">In Review</option>
+            </select>
+
+            <input id="newAttorney" type="text" placeholder="Assigned Attorney">
+            <button id="saveCase" class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">Save Case</button>
+            <button id="closeModal" class="btn btn-secondary" style="width: 100%;">Cancel</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>LegalCase Pro</h3>
+                <p>Manage your cases efficiently.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LegalCase Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =============== ADVANCED JAVASCRIPT =============== -->
+    <script>
+        // CASE DATA
+        let cases = [
+            { id: "CASE-001", client: "John Smith", type: "Civil Litigation", date: "2024-11-15", status: "Active", attorney: "Attorney A. Johnson" },
+            { id: "CASE-002", client: "Sarah Johnson", type: "Criminal Defense", date: "2024-11-20", status: "Pending", attorney: "Attorney B. Williams" },
+            { id: "CASE-003", client: "Michael Brown", type: "Corporate Law", date: "2024-10-10", status: "Active", attorney: "Attorney C. Davis" },
+            { id: "CASE-004", client: "Emily Davis", type: "Family Law", date: "2024-11-25", status: "In Review", attorney: "Attorney A. Johnson" },
+            { id: "CASE-005", client: "Robert Wilson", type: "Real Estate", date: "2024-09-05", status: "Active", attorney: "Attorney B. Williams" },
+            { id: "CASE-006", client: "Lisa Anderson", type: "Employment Law", date: "2024-08-20", status: "Closed", attorney: "Attorney C. Davis" }
+        ];
+
+        // Render Table
+        function renderTable() {
+            const tbody = document.getElementById("tableBody");
+            tbody.innerHTML = "";
+
+            cases.forEach(c => {
+                let badgeClass =
+                    c.status === "Active" ? "badge-success" :
+                    c.status === "Pending" ? "badge-warning" :
+                    c.status === "Closed" ? "badge-danger" :
+                    "badge-primary";
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>#${c.id}</strong></td>
+                        <td>${c.client}</td>
+                        <td>${c.type}</td>
+                        <td>${c.date}</td>
+                        <td><span class="badge ${badgeClass}">${c.status}</span></td>
+                        <td>${c.attorney}</td>
+                        <td>
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-secondary">Edit</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            updateStats();
+        }
+
+        // Update Statistics
+        function updateStats() {
+            let total = cases.length;
+            let active = cases.filter(c => c.status === "Active").length;
+            let pending = cases.filter(c => c.status === "Pending").length;
+            let closed = cases.filter(c => c.status === "Closed").length;
+
+            document.getElementById("statsContainer").innerHTML = `
+                <div><h3>${total}</h3><p>Total Cases</p></div>
+                <div><h3>${active}</h3><p>Active</p></div>
+                <div><h3>${pending}</h3><p>Pending</p></div>
+                <div><h3>${closed}</h3><p>Closed</p></div>
+            `;
+        }
+
+        // Search Functionality
+        document.getElementById("searchBtn").addEventListener("click", () => {
+            let query = document.getElementById("searchInput").value.toLowerCase();
+            let filter = document.getElementById("statusFilter").value;
+
+            let filtered = cases.filter(c =>
+                (c.client.toLowerCase().includes(query) ||
+                c.type.toLowerCase().includes(query) ||
+                c.id.toLowerCase().includes(query)) &&
+                (filter === "All" || c.status === filter)
+            );
+
+            renderFilteredTable(filtered);
+        });
+
+        function renderFilteredTable(data) {
+            const tbody = document.getElementById("tableBody");
+            tbody.innerHTML = "";
+
+            data.forEach(c => {
+                tbody.innerHTML += `
+                <tr>
+                    <td><strong>#${c.id}</strong></td>
+                    <td>${c.client}</td>
+                    <td>${c.type}</td>
+                    <td>${c.date}</td>
+                    <td>${c.status}</td>
+                    <td>${c.attorney}</td>
+                </tr>`;
+            });
+        }
+
+        // Add Case Modal Logic
+        document.getElementById("openAddModal").onclick = () => {
+            document.getElementById("addCaseModal").style.display = "flex";
+        };
+
+        document.getElementById("closeModal").onclick = () => {
+            document.getElementById("addCaseModal").style.display = "none";
+        };
+
+        document.getElementById("saveCase").onclick = () => {
+            let newId = `CASE-${String(cases.length + 1).padStart(3, "0")}`;
+            let newClient = document.getElementById("newClient").value;
+            let newType = document.getElementById("newType").value;
+            let newStatus = document.getElementById("newStatus").value;
+            let newAttorney = document.getElementById("newAttorney").value;
+
+            if (!newClient || !newType || !newAttorney) {
+                alert("Fill all fields!");
+                return;
+            }
+
+            let today = new Date().toISOString().split("T")[0];
+
+            cases.push({
+                id: newId,
+                client: newClient,
+                type: newType,
+                date: today,
+                status: newStatus,
+                attorney: newAttorney
+            });
+
+            document.getElementById("addCaseModal").style.display = "none";
+            renderTable();
+        };
+
+        // Load Table Initially
+        renderTable();
+    </script>
+</body>
+</html>
